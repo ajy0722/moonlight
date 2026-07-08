@@ -1,10 +1,13 @@
+import { IndexedDbFileRepository } from "@/lib/repositories/indexeddb-file-repository";
 import { LocalHighlightRepository } from "@/lib/repositories/local-highlight-repository";
 import { LocalTaskRepository } from "@/lib/repositories/local-task-repository";
+import type { FileRepository } from "@/lib/repositories/file-repository";
 import type { HighlightRepository } from "@/lib/repositories/highlight-repository";
 import type { TaskRepository } from "@/lib/repositories/task-repository";
 
 let repositoryInstance: TaskRepository | null = null;
 let highlightRepositoryInstance: HighlightRepository | null = null;
+let fileRepositoryInstance: FileRepository | null = null;
 
 /**
  * 앱 전역에서 사용할 TaskRepository 인스턴스를 반환한다.
@@ -30,4 +33,12 @@ export function getHighlightRepository(): HighlightRepository {
     highlightRepositoryInstance = new LocalHighlightRepository();
   }
   return highlightRepositoryInstance;
+}
+
+/** 앱 전역에서 사용할 FileRepository 인스턴스를 반환한다. */
+export function getFileRepository(): FileRepository {
+  if (!fileRepositoryInstance) {
+    fileRepositoryInstance = new IndexedDbFileRepository();
+  }
+  return fileRepositoryInstance;
 }
