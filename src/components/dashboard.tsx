@@ -18,10 +18,6 @@ export function Dashboard() {
   return (
     <div className="mx-auto flex w-full max-w-5xl flex-col gap-6 px-4 py-10">
       <header className="flex flex-col gap-1">
-        <div className="flex items-center gap-2 text-xs font-medium tracking-wide text-indigo-500 uppercase">
-          <span className="h-1.5 w-1.5 rounded-full bg-indigo-500" />
-          Personal Assistant
-        </div>
         <h1 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-50">
           개인 비서 대시보드
         </h1>
