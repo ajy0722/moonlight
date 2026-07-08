@@ -1,7 +1,10 @@
+import { LocalHighlightRepository } from "@/lib/repositories/local-highlight-repository";
 import { LocalTaskRepository } from "@/lib/repositories/local-task-repository";
+import type { HighlightRepository } from "@/lib/repositories/highlight-repository";
 import type { TaskRepository } from "@/lib/repositories/task-repository";
 
 let repositoryInstance: TaskRepository | null = null;
+let highlightRepositoryInstance: HighlightRepository | null = null;
 
 /**
  * 앱 전역에서 사용할 TaskRepository 인스턴스를 반환한다.
@@ -19,4 +22,12 @@ export function getTaskRepository(): TaskRepository {
     repositoryInstance = new LocalTaskRepository();
   }
   return repositoryInstance;
+}
+
+/** 앱 전역에서 사용할 HighlightRepository 인스턴스를 반환한다. */
+export function getHighlightRepository(): HighlightRepository {
+  if (!highlightRepositoryInstance) {
+    highlightRepositoryInstance = new LocalHighlightRepository();
+  }
+  return highlightRepositoryInstance;
 }

@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "개인 비서 대시보드",
-  description: "오늘 할 일과 주간 일정을 관리하는 개인 비서 대시보드",
+  title: "Moonlight",
+  description: "오늘 할 일과 전공 공부를 관리하는 개인 대시보드, Moonlight",
 };
 
 export default function RootLayout({

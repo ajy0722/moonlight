@@ -1,6 +1,6 @@
 "use client";
 
-import { BookOpen, CalendarCheck2 } from "lucide-react";
+import { BookOpen, CalendarCheck2, Home } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { STUDY_SUBJECTS } from "@/lib/subjects";
@@ -12,11 +12,16 @@ export function Sidebar() {
     <aside className="flex w-60 shrink-0 flex-col gap-6 border-r border-slate-200/70 bg-white/60 px-4 py-8 dark:border-slate-800/70 dark:bg-slate-900/40">
       <div className="flex items-center gap-2 px-2 text-xs font-medium tracking-wide text-indigo-500 uppercase">
         <span className="h-1.5 w-1.5 rounded-full bg-indigo-500" />
-        Personal Assistant
+        Moonlight
       </div>
 
       <nav className="flex flex-col gap-1">
         <SidebarLink href="/" active={pathname === "/"}>
+          <Home className="h-4 w-4" />
+          메인
+        </SidebarLink>
+
+        <SidebarLink href="/schedule" active={pathname === "/schedule"}>
           <CalendarCheck2 className="h-4 w-4" />
           일정
         </SidebarLink>
