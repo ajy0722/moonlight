@@ -1,6 +1,7 @@
 "use client";
 
 import { GreetingBar } from "@/components/greeting-bar";
+import { HourlyWeatherCard } from "@/components/home/hourly-weather-card";
 import { QuickMemoCard } from "@/components/home/quick-memo-card";
 import { TodayScheduleCard } from "@/components/home/today-schedule-card";
 import { TodayTodosCard } from "@/components/home/today-todos-card";
@@ -28,9 +29,8 @@ export function HomeOverview() {
       <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-2">
         <TodayScheduleCard events={events} onAdd={addEvent} onDelete={deleteEvent} />
         <TodayTodosCard tasks={tasks} onToggle={toggleTask} onDelete={deleteTask} />
-        <div className="lg:col-span-2">
-          <QuickMemoCard memos={memos} onAdd={addMemo} onDelete={deleteMemo} />
-        </div>
+        <QuickMemoCard memos={memos} onAdd={addMemo} onDelete={deleteMemo} />
+        <HourlyWeatherCard />
       </div>
     </div>
   );
