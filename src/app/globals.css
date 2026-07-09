@@ -1,8 +1,11 @@
 @import "tailwindcss";
 
+/* 다크 테마 고정: html에 항상 .dark 클래스를 붙여 dark: 변형을 활성화한다 */
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
-  --background: #f8fafc;
-  --foreground: #0f172a;
+  --background: #0a0a0a;
+  --foreground: #e8e8e8;
 }
 
 @theme inline {
@@ -12,19 +15,17 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #030712;
-    --foreground: #f1f5f9;
-  }
-}
-
 body {
   background:
-    radial-gradient(circle at 15% 0%, rgba(99, 102, 241, 0.08), transparent 45%),
-    radial-gradient(circle at 85% 0%, rgba(56, 189, 248, 0.07), transparent 40%),
+    radial-gradient(circle at 15% 0%, rgba(34, 211, 238, 0.05), transparent 45%),
+    radial-gradient(circle at 85% 0%, rgba(6, 182, 212, 0.04), transparent 40%),
     var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
   min-height: 100vh;
+}
+
+/* 다크 배경에서 네이티브 폼 컨트롤(date/time picker 등)도 어둡게 */
+:root {
+  color-scheme: dark;
 }

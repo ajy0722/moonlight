@@ -2,15 +2,13 @@
 
 import { Plus } from "lucide-react";
 import { useState, type FormEvent } from "react";
+import { fieldClass, primaryButtonClass } from "@/lib/ui";
 import type { NewTaskInput, Priority } from "@/types/task";
 
 interface AddTaskFormProps {
   defaultDate: string;
   onAdd: (input: NewTaskInput) => void;
 }
-
-const fieldClass =
-  "rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 transition focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100";
 
 export function AddTaskForm({ defaultDate, onAdd }: AddTaskFormProps) {
   const [title, setTitle] = useState("");
@@ -34,12 +32,13 @@ export function AddTaskForm({ defaultDate, onAdd }: AddTaskFormProps) {
         type="text"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
-        placeholder="할 일을 입력하세요"
+        placeholder="새 할 일 추가"
         className={`flex-1 ${fieldClass}`}
       />
       <select
         value={priority}
         onChange={(e) => setPriority(e.target.value as Priority)}
+        aria-label="우선순위"
         className={fieldClass}
       >
         <option value="high">높음</option>
@@ -50,12 +49,10 @@ export function AddTaskForm({ defaultDate, onAdd }: AddTaskFormProps) {
         type="date"
         value={dueDate}
         onChange={(e) => setDueDate(e.target.value)}
+        aria-label="마감일"
         className={fieldClass}
       />
-      <button
-        type="submit"
-        className="inline-flex items-center justify-center gap-1.5 rounded-xl bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm shadow-indigo-600/25 transition hover:bg-indigo-500 active:bg-indigo-700"
-      >
+      <button type="submit" className={primaryButtonClass}>
         <Plus className="h-4 w-4" />
         추가
       </button>

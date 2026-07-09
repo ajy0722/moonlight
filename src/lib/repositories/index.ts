@@ -1,13 +1,19 @@
 import { IndexedDbFileRepository } from "@/lib/repositories/indexeddb-file-repository";
+import { LocalEventRepository } from "@/lib/repositories/local-event-repository";
 import { LocalHighlightRepository } from "@/lib/repositories/local-highlight-repository";
+import { LocalMemoRepository } from "@/lib/repositories/local-memo-repository";
 import { LocalTaskRepository } from "@/lib/repositories/local-task-repository";
+import type { EventRepository } from "@/lib/repositories/event-repository";
 import type { FileRepository } from "@/lib/repositories/file-repository";
 import type { HighlightRepository } from "@/lib/repositories/highlight-repository";
+import type { MemoRepository } from "@/lib/repositories/memo-repository";
 import type { TaskRepository } from "@/lib/repositories/task-repository";
 
 let repositoryInstance: TaskRepository | null = null;
 let highlightRepositoryInstance: HighlightRepository | null = null;
 let fileRepositoryInstance: FileRepository | null = null;
+let eventRepositoryInstance: EventRepository | null = null;
+let memoRepositoryInstance: MemoRepository | null = null;
 
 /**
  * 앱 전역에서 사용할 TaskRepository 인스턴스를 반환한다.
@@ -41,4 +47,20 @@ export function getFileRepository(): FileRepository {
     fileRepositoryInstance = new IndexedDbFileRepository();
   }
   return fileRepositoryInstance;
+}
+
+/** 앱 전역에서 사용할 EventRepository 인스턴스를 반환한다. */
+export function getEventRepository(): EventRepository {
+  if (!eventRepositoryInstance) {
+    eventRepositoryInstance = new LocalEventRepository();
+  }
+  return eventRepositoryInstance;
+}
+
+/** 앱 전역에서 사용할 MemoRepository 인스턴스를 반환한다. */
+export function getMemoRepository(): MemoRepository {
+  if (!memoRepositoryInstance) {
+    memoRepositoryInstance = new LocalMemoRepository();
+  }
+  return memoRepositoryInstance;
 }

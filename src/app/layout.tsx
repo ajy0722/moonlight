@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Header } from "@/components/header";
 import { Sidebar } from "@/components/sidebar";
 import "./globals.css";
 
@@ -15,7 +16,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Moonlight",
-  description: "오늘 할 일과 전공 공부를 관리하는 개인 대시보드, Moonlight",
+  description: "일정·할 일·메모를 한곳에서 관리하는 개인 비서 대시보드, Moonlight",
 };
 
 export default function RootLayout({
@@ -26,11 +27,14 @@ export default function RootLayout({
   return (
     <html
       lang="ko"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} dark h-full antialiased`}
     >
       <body className="flex min-h-full">
         <Sidebar />
-        <main className="min-w-0 flex-1">{children}</main>
+        <div className="flex min-w-0 flex-1 flex-col">
+          <Header />
+          <main className="min-w-0 flex-1">{children}</main>
+        </div>
       </body>
     </html>
   );

@@ -1,35 +1,42 @@
 "use client";
 
-import { HighlightsSummary } from "@/components/home/highlights-summary";
-import { UpcomingTasks } from "@/components/home/upcoming-tasks";
-import { useAllHighlights } from "@/hooks/use-all-highlights";
+import { GreetingBar } from "@/components/greeting-bar";
+import { QuickMemoCard } from "@/components/home/quick-memo-card";
+import { TodayScheduleCard } from "@/components/home/today-schedule-card";
+import { TodayTodosCard } from "@/components/home/today-todos-card";
+import { useEvents } from "@/hooks/use-events";
+import { useMemos } from "@/hooks/use-memos";
 import { useTasks } from "@/hooks/use-tasks";
 
 export function HomeOverview() {
-  const { tasks, isLoading: tasksLoading, toggleTask, deleteTask } = useTasks();
-  const { highlights, isLoading: highlightsLoading } = useAllHighlights();
+  const { tasks, isLoading: tasksLoading, addTask, toggleTask, deleteTask } = useTasks();
+  const { events, isLoading: eventsLoading, addEvent, deleteEvent } = useEvents();
+  const { memos, addMemo, deleteMemo } = useMemos();
 
-  if (tasksLoading) {
+  if (tasksLoading || eventsLoading) {
     return (
-      <div className="flex min-h-[50vh] items-center justify-center text-sm text-slate-400">
+      <div className="flex min-h-[50vh] items-center justify-center text-sm text-neutral-500">
         불러오는 중...
       </div>
     );
   }
 
   return (
-    <div className="mx-auto flex w-full max-w-5xl flex-col gap-6 px-4 py-10">
-      <header className="flex flex-col gap-1">
-        <h1 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-50">
-          Moonlight
-        </h1>
-        <p className="text-sm text-slate-500 dark:text-slate-400">
-          오늘과 내일의 할 일, 그리고 정리해 둔 전공 요약을 한눈에 확인하세요.
-        </p>
-      </header>
+    <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-6 py-8">
+      <GreetingBar />
 
-      <UpcomingTasks tasks={tasks} onToggle={toggleTask} onDelete={deleteTask} />
-      <HighlightsSummary highlights={highlights} isLoading={highlightsLoading} />
+      <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-2">
+        <TodayScheduleCard events={events} onAdd={addEvent} onDelete={deleteEvent} />
+        <TodayTodosCard
+          tasks={tasks}
+          onAdd={addTask}
+          onToggle={toggleTask}
+          onDelete={deleteTask}
+        />
+        <div className="lg:col-span-2">
+          <QuickMemoCard memos={memos} onAdd={addMemo} onDelete={deleteMemo} />
+        </div>
+      </div>
     </div>
   );
 }
