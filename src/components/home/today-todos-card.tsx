@@ -2,21 +2,19 @@
 
 import { ListChecks } from "lucide-react";
 import { useMemo } from "react";
-import { AddTaskForm } from "@/components/add-task-form";
 import { TaskItem } from "@/components/task-item";
 import { toDateKey } from "@/lib/date-utils";
 import { sortByPriority } from "@/lib/priority";
 import { cardClass, cardIconClass } from "@/lib/ui";
-import type { NewTaskInput, Task } from "@/types/task";
+import type { Task } from "@/types/task";
 
 interface TodayTodosCardProps {
   tasks: Task[];
-  onAdd: (input: NewTaskInput) => void;
   onToggle: (id: string) => void;
   onDelete: (id: string) => void;
 }
 
-export function TodayTodosCard({ tasks, onAdd, onToggle, onDelete }: TodayTodosCardProps) {
+export function TodayTodosCard({ tasks, onToggle, onDelete }: TodayTodosCardProps) {
   const today = useMemo(() => toDateKey(new Date()), []);
 
   const todayTasks = useMemo(() => {
@@ -52,10 +50,6 @@ export function TodayTodosCard({ tasks, onAdd, onToggle, onDelete }: TodayTodosC
           ))}
         </ul>
       )}
-
-      <div className="mt-auto">
-        <AddTaskForm defaultDate={today} onAdd={onAdd} />
-      </div>
     </section>
   );
 }

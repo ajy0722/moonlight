@@ -9,7 +9,7 @@ import { useMemos } from "@/hooks/use-memos";
 import { useTasks } from "@/hooks/use-tasks";
 
 export function HomeOverview() {
-  const { tasks, isLoading: tasksLoading, addTask, toggleTask, deleteTask } = useTasks();
+  const { tasks, isLoading: tasksLoading, toggleTask, deleteTask } = useTasks();
   const { events, isLoading: eventsLoading, addEvent, deleteEvent } = useEvents();
   const { memos, addMemo, deleteMemo } = useMemos();
 
@@ -27,12 +27,7 @@ export function HomeOverview() {
 
       <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-2">
         <TodayScheduleCard events={events} onAdd={addEvent} onDelete={deleteEvent} />
-        <TodayTodosCard
-          tasks={tasks}
-          onAdd={addTask}
-          onToggle={toggleTask}
-          onDelete={deleteTask}
-        />
+        <TodayTodosCard tasks={tasks} onToggle={toggleTask} onDelete={deleteTask} />
         <div className="lg:col-span-2">
           <QuickMemoCard memos={memos} onAdd={addMemo} onDelete={deleteMemo} />
         </div>
