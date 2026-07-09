@@ -1,6 +1,6 @@
 "use client";
 
-import { CalendarCheck2, Home } from "lucide-react";
+import { Calculator, CalendarCheck2, Home, Timer } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -23,6 +23,16 @@ export function Sidebar() {
         <SidebarLink href="/schedule" active={pathname === "/schedule"}>
           <CalendarCheck2 className="h-4 w-4" />
           일정
+        </SidebarLink>
+
+        <SidebarLink href="/timer" active={pathname === "/timer"}>
+          <Timer className="h-4 w-4" />
+          타이머
+        </SidebarLink>
+
+        <SidebarLink href="/calculator" active={pathname === "/calculator"}>
+          <Calculator className="h-4 w-4" />
+          계산기
         </SidebarLink>
       </nav>
     </aside>
